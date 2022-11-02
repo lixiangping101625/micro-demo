@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hlkj.domain.order.mapper.OrderMapper">
+
+    <select id="list" resultType="com.hlkj.domain.order.pojo.Order">
+        SELECT
+            o.id AS id,
+            o.title AS title,
+            o.total_price AS totalPrice,
+            o.addr AS addr,
+            o.items_json AS itemsJson,
+            o.count AS count,
+            o.user_id AS userId
+        FROM
+            `ORDER` o
+    </select>
+
+    <select id="getDetail" resultType="com.hlkj.domain.order.pojo.Order"
+            parameterType="long">
+        SELECT
+            o.id AS id,
+            o.title AS title,
+            o.total_price AS totalPrice,
+            o.addr AS addr,
+            o.items_json AS itemsJson,
+            o.count AS count,
+            o.user_id AS userId
+        FROM
+            `ORDER` o
+        where o.id = #{id}
+    </select>
+
+</mapper>

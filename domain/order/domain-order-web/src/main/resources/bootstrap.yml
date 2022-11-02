@@ -1,0 +1,10 @@
+## eureka注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/
+
+  instance:
+    lease-expiration-duration-in-seconds: 6
+    lease-renewal-interval-in-seconds: 3
+

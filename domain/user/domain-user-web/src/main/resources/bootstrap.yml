@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka/
+
+#################################
+###配置中心
+#################################
+spring:
+  cloud:
+    config:
+      #如果当前项目application-name和GitHub上面存放的文件名不一致时指定name（要拉取的文件名）
+      name: domain-user-service
+      discovery:
+        enabled: true
+        # 配置中心的id（应用名称）
+        service-id: config-server
+      profile: dev
+      # 默认
+      label: main

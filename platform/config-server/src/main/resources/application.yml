@@ -1,0 +1,44 @@
+server:
+  port: 20003
+
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    config:
+      server:
+        # 属性重载
+        overrides:
+          test: mytest
+        git:
+          uri: https://github.com/lixiangping101625/config-repo.git
+          # 强制拉取资源文件
+          force-pull: true
+            # 将配置文件放到接入方服务名称对应的文件夹下
+          search-paths: '{application}'
+          #username:
+          #password:
+        default-label: main
+
+###########################
+#####eureka注册中心配置
+###########################
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1.com:20000/eureka/
+
+#######################################
+####开启所有actuator-endpoint
+#######################################
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

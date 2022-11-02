@@ -1,0 +1,128 @@
+server:
+  port: 10003
+
+spring:
+  application:
+    name: domain-order-service
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    # 拆分数据源到独立database instance或者schema
+    url: jdbc:mysql://127.0.0.1:3307/cloud-mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+  cloud:
+    config:
+      allow-override: true
+
+
+# mybatis配置
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.hlkj.domain.order.pojo
+
+########################
+###mybatis mapper配置
+########################
+#通用mapper配置
+
+mapper:
+  mappers: com.hlkj.common.mapper.MyMapper
+  not-empty: false
+  identity: MYSQL
+#分页插件配置
+pagehelper:
+  support-methods-arguments: true
+  helper-dialect: mysql
+
+logging:
+  level:
+    com.hlkj.domain.order.mapper: debug
+
+
+###########################
+#####暴露actuator端点
+#####hystrix监控使用
+###########################
+#配置中心github，无招胜有招（启动的时候从GitHub拉取这些属性，属性名称和GitHub配置一样，自动加载到项目中）
+management:
+  security:
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+# feign的超时判定，优先级高于ribbon
+feign:
+  hystrix:
+    # 控制feign接口上的降级是否开启/关闭
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 1000
+        readTimeout: 5000
+      cloud-user-service:
+        connectTimeout: 3000
+        readTimeout: 5000
+
+###############################
+###Hystrix超时和熔断
+###############################
+hystrix:
+  command:
+    # 有的属性是默认值，写不写都行
+    #     如果要针对具体方法，只需要将default改为方法签名（Feign的工具类可以获取）即可。
+    #     如果方法使用@HystrixCommand，使用commandKey（默认方法名）指定的即可。
+    default:
+      fallback:
+        # 是否开启降级
+        enabled: true
+      circuitBreaker:
+        # 开启/关闭熔断功能（默认true）
+        enabled: true
+        # 强制开启/关闭熔断开关
+        forceOpen: false
+        forceClosed: false
+        # 超过50%错误才开启熔断
+        errorThresholdPercentage: 50
+        # 5个request之后才进行统计
+        requestVolumeThreshold: 5
+        # 进入熔断之后，10s后进入半开状态
+        sleepWindowInMilliseconds: 10000
+      execution:
+        timeout:
+          #开启全局超时
+          enabled: true
+        # 线程池隔离方案
+        isolation:
+          thread:
+            intteruptOnTimeout: true
+            intteruptOnFutureCancel: true
+            # hystrix的timeout超时配置（注意和feign超时的协同：时间短的生效，一般是hystrix长一点。）
+            timeoutInMilliseconds: 10000
+      # hystrix监控信息统计
+      metrics:
+        rollingStats:
+          # 断路时间窗口
+          timeInMilliseconds: 20000
+          # 统计桶的数量（一般应该可以被timeInMilliseconds整除）
+          # numBuckets: 10
+#        rollingPercentile:
+#          # 断路时间窗口
+#          timeInMilliseconds: 20000
+#          # 统计桶的数量（一般应该可以被timeInMilliseconds整除）
+#          # numBuckets: 1
+#          #在过去的timeInMilliseconds毫秒内，如果有500个请求，这里只记录300个
+#          bucketSize: 300

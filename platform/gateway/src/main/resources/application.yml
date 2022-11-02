@@ -1,0 +1,46 @@
+# 可以尝试集成config-server来进行配置
+
+server:
+  port: 20004
+
+spring:
+  application:
+    name: platform-gateway
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    host: 120.27.203.113
+    password: yuanban_redis
+    database: 10
+    port: 6379
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          # gateway去配置中心拉取所有已经注册的服务，并且为它创建默认的路由规则
+          # 生产环境一般不会为服务创建默认的路由规则(建议在代码中配置，更直观)
+          enabled: false
+          # 控制大小写
+          lower-case-service-id: true
+
+###########################
+#####eureka注册中心配置
+###########################
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1.com:20000/eureka/
+
+#######################################
+####开启所有actuator-endpoint
+#######################################
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
