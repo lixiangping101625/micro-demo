@@ -46,8 +46,8 @@ public interface AuthService {
     /**
      * 删除token
      */
-    @DeleteMapping("delete")
+    @GetMapping("delete")
     @ResponseBody
-    public AuthResponse delete(@RequestBody Account account);
+    public AuthResponse delete(@RequestParam(name = "userId") Long userId);
 
 }

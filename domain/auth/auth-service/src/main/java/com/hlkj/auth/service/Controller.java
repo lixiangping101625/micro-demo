@@ -47,7 +47,7 @@ public class Controller implements AuthService {
         account.setRefreshToken(UUID.randomUUID().toString());
 
         //存入redis
-        redisTemplate.opsForValue().set(account.getRefreshToken(), account);
+        redisTemplate.opsForValue().set(user.getId(), account);
 
         return AuthResponse.builder()
                 .account(account)
@@ -57,6 +57,11 @@ public class Controller implements AuthService {
 
     @Override
     public AuthResponse verify(Long userId, String token) {
+        // 判断redis中是否存在(强制登出只会删除redis中的，所以需要检查redis中当前token是否生效)
+        Object o = redisTemplate.opsForValue().get(userId);
+        if (null == o){
+            return AuthResponse.builder().responseCode(ResponseCode.INVALID_TOKEN).build();
+        }
         boolean success = jwtService.verify(token, userId);
         return AuthResponse.builder()
                 .responseCode(success ? ResponseCode.SUCCESS:ResponseCode.INVALID_TOKEN)
@@ -82,11 +87,12 @@ public class Controller implements AuthService {
                 .build();
     }
 
-    public AuthResponse delete(Account account) {
-        //1、判断用户是否正确
-        //2、删除token
-        //3、删除refreshtoken
-        return null;
+    public AuthResponse delete(@RequestParam(name = "userId") Long userId) {
+        //删除redis
+        redisTemplate.delete(userId);
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setResponseCode(ResponseCode.SUCCESS);
+        return authResponse;
     }
 
 }
