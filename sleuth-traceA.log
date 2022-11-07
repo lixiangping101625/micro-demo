@@ -1,0 +1,37 @@
+2022-11-04 10:33:21.419  INFO [sleuth-traceA,,,] 12100 --- [DiscoveryClient-HeartbeatExecutor-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_SLEUTH-TRACEA/host.docker.internal:sleuth-traceA:62000 - Re-registering apps/SLEUTH-TRACEA
+2022-11-04 10:33:21.428  INFO [sleuth-traceA,,,] 12100 --- [DiscoveryClient-HeartbeatExecutor-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_SLEUTH-TRACEA/host.docker.internal:sleuth-traceA:62000: registering service...
+2022-11-04 10:33:21.436  INFO [sleuth-traceA,,,] 12100 --- [DiscoveryClient-HeartbeatExecutor-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_SLEUTH-TRACEA/host.docker.internal:sleuth-traceA:62000 - registration status: 204
+2022-11-04 10:36:01.233  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 10:41:01.235  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 10:46:01.236  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 10:51:01.240  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 10:56:01.248  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:01:01.256  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:06:01.259  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:11:01.260  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:16:01.261  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:21:01.270  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:26:01.271  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:31:01.272  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:36:01.276  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:41:01.289  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:46:01.300  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:51:01.315  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 11:56:01.322  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:01:01.326  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:06:01.337  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:11:01.344  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:16:01.355  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:21:01.369  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:26:01.371  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:31:01.382  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:36:01.388  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:41:01.396  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:46:01.402  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:51:01.412  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 12:56:01.428  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 13:01:01.433  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 13:06:01.441  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 13:11:01.445  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 13:16:01.450  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2022-11-04 13:21:01.459  INFO [sleuth-traceA,,,] 12100 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration

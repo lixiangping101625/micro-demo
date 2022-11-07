@@ -34,6 +34,10 @@
         <module>platform/config-server</module>
         <module>domain/auth/auth-api</module>
         <module>domain/auth/auth-service</module>
+        <module>sleuth/sleuth-traceA</module>
+        <module>sleuth/sleuth-traceB</module>
+        <module>sleuth/zipkin-server</module>
+        <module>stream/stream-sample</module>
     </modules>
 
     <properties/>

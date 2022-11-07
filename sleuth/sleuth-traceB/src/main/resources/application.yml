@@ -1,0 +1,44 @@
+server:
+  port: 62001
+
+logging:
+  file: ${spring.application.name}.log
+
+spring:
+  application:
+    name: sleuth-traceB
+  sleuth:
+    sampler:
+      # sleuth采样率 默认10%即0.1
+      probability: 1
+  # zipkin地址
+  zipkin:
+    base-url: http://localhost:62100
+
+###########################
+#####eureka注册中心配置
+###########################
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1.com:20000/eureka/
+
+
+info:
+  app:
+    name: sleuth-traceB
+    description: test
+
+#######################################
+####开启所有actuator-endpoint
+#######################################
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
