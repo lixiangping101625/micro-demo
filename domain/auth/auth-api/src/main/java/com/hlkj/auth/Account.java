@@ -18,9 +18,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Account implements Serializable {
 
+    private static final long serialVersionID = 1L;
+
     private Long userId;
     private String username;
     private String token;
     private String refreshToken;
+    private boolean skipVerification;
 
 }

@@ -29,10 +29,9 @@ public interface AuthService {
      * @param token
      * @return
      */
-    @GetMapping("verify")
+    @PostMapping("verify")
     @ResponseBody
-    public AuthResponse verify(@RequestParam(name = "userId") Long userId,
-                               @RequestParam(name = "token") String token);
+    public AuthResponse verify(@RequestBody Account account);
 
     /**
      * 刷新token
@@ -46,8 +45,8 @@ public interface AuthService {
     /**
      * 删除token
      */
-    @GetMapping("delete")
+    @PostMapping("delete")
     @ResponseBody
-    public AuthResponse delete(@RequestParam(name = "userId") Long userId);
+    public AuthResponse delete(@RequestBody Account account);
 
 }

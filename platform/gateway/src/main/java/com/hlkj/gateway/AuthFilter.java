@@ -1,5 +1,6 @@
 package com.hlkj.gateway;
 
+import com.hlkj.auth.Account;
 import com.hlkj.auth.AuthResponse;
 import com.hlkj.auth.AuthService;
 import com.hlkj.auth.ResponseCode;
@@ -52,7 +53,11 @@ public class AuthFilter implements GatewayFilter, Ordered {
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
-        AuthResponse response1 = authService.verify(Long.parseLong(userId), token);
+        Account account = Account.builder()
+                .userId(Long.parseLong(userId))
+                .token(token)
+                .build();
+        AuthResponse response1 = authService.verify(account);
         if (response1.getResponseCode() != ResponseCode.SUCCESS) {
             log.info("invalid token");
             response.setStatusCode(HttpStatus.FORBIDDEN);

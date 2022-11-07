@@ -29,6 +29,8 @@ public class Controller implements AuthService {
     @Resource
     private UserService userService;
 
+    private static final String USER_TOKEN = "USER_TOKEN-";
+
     public AuthResponse login(@RequestParam String username,
                               @RequestParam String password){
         Account account = Account.builder()
@@ -47,7 +49,8 @@ public class Controller implements AuthService {
         account.setRefreshToken(UUID.randomUUID().toString());
 
         //存入redis
-        redisTemplate.opsForValue().set(user.getId(), account);
+        redisTemplate.opsForValue().set(USER_TOKEN + user.getId(), account);
+        redisTemplate.opsForValue().set(account.getRefreshToken(), user.getId());
 
         return AuthResponse.builder()
                 .account(account)
@@ -56,29 +59,31 @@ public class Controller implements AuthService {
     }
 
     @Override
-    public AuthResponse verify(Long userId, String token) {
+    public AuthResponse verify(@RequestBody Account account) {
         // 判断redis中是否存在(强制登出只会删除redis中的，所以需要检查redis中当前token是否生效)
-        Object o = redisTemplate.opsForValue().get(userId);
+        Object o = redisTemplate.opsForValue().get(USER_TOKEN + account.getUserId());
         if (null == o){
             return AuthResponse.builder().responseCode(ResponseCode.INVALID_TOKEN).build();
         }
-        boolean success = jwtService.verify(token, userId);
+        boolean success = jwtService.verify(account.getToken(), account.getUserId());
         return AuthResponse.builder()
                 .responseCode(success ? ResponseCode.SUCCESS:ResponseCode.INVALID_TOKEN)
                 .build();
     }
 
     public AuthResponse refresh(@RequestParam String refreshToken){
-        Account account = (Account) redisTemplate.opsForValue().get(refreshToken);
-        if (account == null) {
+        Long userId= (Long) redisTemplate.opsForValue().get(refreshToken);
+        if (userId == null) {// refreshToken已过期
             return AuthResponse.builder().responseCode(ResponseCode.USER_NOT_FOUND)
                     .build();
         }
-
+        Account account = Account.builder().userId(userId).build();
         String token = jwtService.token(account);
         account.setToken(token);
         account.setRefreshToken(UUID.randomUUID().toString());
         redisTemplate.delete(account.getRefreshToken());
+
+        redisTemplate.opsForValue().set(USER_TOKEN + account.getUserId(), token);
         redisTemplate.opsForValue().set(account.getRefreshToken(), account);
 
         return AuthResponse.builder()
@@ -87,11 +92,21 @@ public class Controller implements AuthService {
                 .build();
     }
 
-    public AuthResponse delete(@RequestParam(name = "userId") Long userId) {
-        //删除redis
-        redisTemplate.delete(userId);
+    public AuthResponse delete(@RequestBody Account account) {
         AuthResponse authResponse = new AuthResponse();
         authResponse.setResponseCode(ResponseCode.SUCCESS);
+        if (account.isSkipVerification()) {
+            //强制登出
+            redisTemplate.delete(USER_TOKEN + account.getUserId());
+        } else {
+            AuthResponse response = verify(account);
+            if (ResponseCode.SUCCESS.equals(response)) {
+                redisTemplate.delete(USER_TOKEN + account.getUserId());
+                redisTemplate.delete(account.getRefreshToken());
+            }else{
+                authResponse.setResponseCode(ResponseCode.INVALID_TOKEN);
+            }
+        }
         return authResponse;
     }
 
