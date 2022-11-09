@@ -21,6 +21,29 @@ spring:
   cloud:
     config:
       allow-override: true
+    # stream配置
+    stream:
+      bindings:
+        order-status-consumer:
+          destination: order-status-topic
+          group: order-group
+          consumer:
+            # 重试次数（默认三次）
+            max-attempts: 2
+        order-status-producer:
+          destination: order-status-topic
+      rabbit:
+        bindings:
+          order-status-producer:
+            producer:
+              delayed-exchange: true
+
+  # rabbitmq
+  rabbitmq:
+    host: 121.40.93.1
+    port: 5672
+    username: admin
+    password: 123456
 
 
 # mybatis配置
