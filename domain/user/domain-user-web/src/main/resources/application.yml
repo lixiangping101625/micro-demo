@@ -22,6 +22,25 @@ spring:
       minimum-idle: 5
       maximum-pool-size: 20
       auto-commit: true
+  # rabbitmq
+  rabbitmq:
+    host: 121.40.93.1
+    port: 5672
+    username: admin
+    password: 123456
+  # stream配置
+  cloud:
+    stream:
+      bindings:
+        force-logout-consumer:
+          destination: force-logout-topic
+          group: force-logout-group
+          consumer:
+            # 重试次数（默认三次）
+            max-attempts: 2
+        force-logout-producer:
+          destination: force-logout-topic
+
 
 # mybatis配置
 mybatis:

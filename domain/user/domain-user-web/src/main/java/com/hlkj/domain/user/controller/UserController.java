@@ -4,16 +4,16 @@ import com.hlkj.domain.user.UserRegisterSwitch;
 import com.hlkj.domain.user.pojo.User;
 import com.hlkj.domain.user.service.UserService;
 import com.hlkj.sharedpojo.pojo.UnifyResponse;
+import com.hlkj.user.stream.ForceLogoutTopic;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -58,6 +58,26 @@ public class UserController {
             return UnifyResponse.buildFailed("当前注册用户过多，请稍后再试");
         }
         return UnifyResponse.buildSuccess("注册成功");
+    }
+
+    /**
+     * 用户强制登录(注意：为了避免非法请求导致他人下线，需要在网关层将该接口移除)
+     */
+    @Resource
+    private ForceLogoutTopic producer;
+    @PostMapping("/forceLogout")
+    public UnifyResponse forceLogout(@RequestParam("userId") String userIds) {
+        if (StringUtils.isNotBlank(userIds)){
+            for (String userId: userIds.split(",")){
+                log.info("send force logout message, userId={}", userId);
+                // 发送消息
+                producer.output().send(
+                        MessageBuilder.withPayload(userId)
+                        .build()
+                );
+            }
+        }
+        return UnifyResponse.buildSuccess();
     }
 
 }
