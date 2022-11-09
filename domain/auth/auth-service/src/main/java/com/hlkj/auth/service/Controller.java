@@ -93,10 +93,9 @@ public class Controller implements AuthService {
     }
 
     public AuthResponse delete(@RequestBody Account account) {
-        AuthResponse authResponse = new AuthResponse();
-        authResponse.setResponseCode(ResponseCode.SUCCESS);
-        if (account.isSkipVerification()) {
-            //强制登出
+        AuthResponse resp = new AuthResponse();
+        resp.setResponseCode(ResponseCode.SUCCESS);
+        if (account.isSkipVerification()) {//强制登出只提供了userId
             redisTemplate.delete(USER_TOKEN + account.getUserId());
         } else {
             AuthResponse response = verify(account);
@@ -104,10 +103,10 @@ public class Controller implements AuthService {
                 redisTemplate.delete(USER_TOKEN + account.getUserId());
                 redisTemplate.delete(account.getRefreshToken());
             }else{
-                authResponse.setResponseCode(ResponseCode.INVALID_TOKEN);
+                resp.setResponseCode(ResponseCode.INVALID_TOKEN);
             }
         }
-        return authResponse;
+        return resp;
     }
 
 }

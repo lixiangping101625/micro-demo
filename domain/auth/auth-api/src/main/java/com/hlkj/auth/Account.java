@@ -24,6 +24,6 @@ public class Account implements Serializable {
     private String username;
     private String token;
     private String refreshToken;
-    private boolean skipVerification;
+    private boolean skipVerification = false;//是否token校验，强制登出不需要
 
 }
