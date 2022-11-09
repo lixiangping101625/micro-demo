@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @createTime 2022年10月31日 20:07
  * @decription:
  */
-@Table(name = "order")
+@Table(name = "t_order")
 @Data
 public class Order implements Serializable {
 
