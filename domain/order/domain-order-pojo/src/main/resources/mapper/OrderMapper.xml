@@ -12,7 +12,7 @@
             o.count AS count,
             o.user_id AS userId
         FROM
-            `ORDER` o
+            t_order o
     </select>
 
     <select id="getDetail" resultType="com.hlkj.domain.order.pojo.Order"
@@ -26,7 +26,7 @@
             o.count AS count,
             o.user_id AS userId
         FROM
-            `ORDER` o
+            t_order o
         where o.id = #{id}
     </select>
 

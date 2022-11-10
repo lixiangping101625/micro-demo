@@ -19,7 +19,7 @@ import java.util.Date;
 public class JwtService {
 
     private static final String ISSUE = "@Hlkj_163666";
-    private static final long TOKEN_EXP_TIME = 60000;
+    private static final long TOKEN_EXP_TIME = 30 * 60 * 1000; //30分钟
     private static final String USER_ID= "userid";
 
     /**
